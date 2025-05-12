@@ -10,7 +10,6 @@ import pandas as pd
 
 with open("dataset/4clasess.pkl","rb") as f:
     data = pkl.load(f)
-
 feature_list = [
     "PeriodLS_v2",
     "Period_fit_v2",
@@ -65,18 +64,17 @@ feature_list = [
     #"Harmonics"
 ]
 feature_list = [
-    "PeriodLS_v2",                 
-    "Amplitude",                 
-    "Std",                        
-    "Skew",                       
-    "SmallKurtosis",              
-    "StetsonK",                   
-    "Rcs",                         
-    "Autocor_length",             
-    "Eta_e",                       
-    "IAR_phi"                      
-]
-
+    "PeriodLS_v2",
+    "Mean",
+    "GP_DRW_sigma",
+    "GP_DRW_tau",
+    "IAR_phi",
+    "Amplitude",
+    "ExcessVar",
+    "Meanvariance",
+    "Std",
+    "SF_ML_amplitude"
+    ]
 
 fs = turbofats.FeatureSpace(feature_list=feature_list)
 
@@ -101,4 +99,4 @@ for i, lc in tqdm(enumerate(data), total=len(data)):
 
 final_df = pd.concat(all_features, ignore_index=True)
 
-print(final_df.head())
+final_df.to_csv("data.csv")
